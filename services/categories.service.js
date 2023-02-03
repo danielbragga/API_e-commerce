@@ -1,5 +1,5 @@
 const { Mongoose } = require("mongoose");
-const category = require("../models/category.model");
+const { category } = require("../models/category.model");
 
 async function createCategory(params, callback) {
   if (!params.categoryName) {
@@ -11,7 +11,8 @@ async function createCategory(params, callback) {
     );
   }
   const model = new category(params);
-  model.save
+  model
+    .save()
     .then((response) => {
       return callback(null, response);
     })
@@ -80,3 +81,11 @@ async function deleteCategory(params, callback) {
       return callback(error);
     });
 }
+
+module.exports = {
+  createCategory,
+  getCategories,
+  getCategoryById,
+  updateCategory,
+  deleteCategory,
+};
